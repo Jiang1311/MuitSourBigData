@@ -1,7 +1,8 @@
 # MuitSourBigData
 # 多源大数据学习
     多源指定是多个数据源，多指nosql，根据实际开发需要，
-    用来学习预研一些技术
+    用来学习预研一些大数据技术，包括但不限于：
+    zookeeper、kafka、redis、cassandra、hadoop、es-stack
 
 ## test介绍
     本项目中的test并非做单元测试，而是用来记录些常用的方法，但尚未
