@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * @author Jeremy
  */
+
 @SpringBootApplication
 public class BigDataApplication {
 
