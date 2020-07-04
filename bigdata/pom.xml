@@ -48,6 +48,34 @@
         </dependency>
 
 
+
+        <!-- rpd4j 文件监听，注意scope是test，如果是项目中使用记得修改-->
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>3.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.jcraft</groupId>
+            <artifactId>jsch</artifactId>
+            <version>0.1.46</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jcifs</groupId>
+            <artifactId>jcifs</artifactId>
+            <version>1.3.17</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.drapostolos</groupId>
+            <artifactId>rdp4j</artifactId>
+            <version>0.0.8</version>
+            <scope>test</scope>
+        </dependency>
+
+
     </dependencies>
 
 
