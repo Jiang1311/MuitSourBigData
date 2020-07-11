@@ -7,7 +7,7 @@
 
 ## 前置
 
-​	购买至少三台服务器，为了节约成本借了两个账号买了三台同一区域的服务器；因此设计到不同账号相同地域之间通讯问题，阿里给了解决方案，详情参考： [云企网](https://help.aliyun.com/document_detail/128508.html?spm=a2c4g.11186623.2.10.798818c0oNp97J)
+​	购买至少三台服务器，为了节约成本借了两个账号买了三台同一区域的服务器，安装的是 centos7；因此设计到不同账号相同地域之间通讯问题，阿里给了解决方案，详情参考： [云企网](https://help.aliyun.com/document_detail/128508.html?spm=a2c4g.11186623.2.10.798818c0oNp97J)
 
 
 
@@ -15,9 +15,9 @@
 
 | 节点    | 私网ip               | 公网ip | 用户名-密码 |
 | ------- | -------------------- | ------ | ----------- |
-| node001 | 1.非注册地址         |        |             |
-| node002 | 2.为组织机构内部使用 |        |             |
-| node003 |                      |        |             |
+| node001 | 1.非注册地址         |        | 普通用户    |
+| node002 | 2.为组织机构内部使用 |        | 普通用户    |
+| node003 |                      |        | 普通用户    |
 
 **公私网简述**
 
@@ -50,15 +50,58 @@
 
 ## 集群搭建
 
+
+
 ### 步骤一：安装Java与Hadoop
 
 Prerequisites
 
 - Install Java. See the [Hadoop Wiki](http://wiki.apache.org/hadoop/HadoopJavaVersions) for known good versions.
+
 - 安装 Java（我使用的是Java8），根据wiki选择适合的版本
+
 - Download a stable version of Hadoop from Apache mirrors.      
+
 - 下载安装Hadoop（我选的是2.7.2 ，我选择的是与公司的一致，没做其他方面考虑）
+
 - 安装很简单    --- 1.解压； 2.设置环境变量  3. sources profile 文件即可
+
+  上述是官网给出去必要条件，当然除了上述以外还需要进行linux的常规配置；
+
+  1. 关闭防火墙，下面命令是针对centos7
+
+  ```shell
+  # 查看防火墙状态
+  firewall-cmd --state
+  # 停止firewall
+  systemctl stop firewalld.service
+  # 禁止firewall开机启动
+  systemctl disable firewalld.service
+  ```
+
+  **注意**:如果小伙伴和我一样用的是esc或者其他类似租借的云服务器，看下他们是否有安全组策略； 以我的为例，需要配置端口访问策略； 阿里云esc： 云服务器管理控制台 ---> 实例 ---> 点击需要配置的实例id，进入 ---> 选择右边菜单栏最后一个本实例安全组 ---> 选择配置规则，按需配置，
+
+  常用端口号在下个节点有个列表可以看下，在000-ESC目录下，放了一份我导出的规则，不想一个个配置的话可以下载后，直接导入
+
+  2. 修改主机名，配置域名映射
+
+  ```shell
+  # 查看主机名
+  hostname 
+  # 修改主机名
+  hostnamectl set-hostname  hadoop001 
+  # 查看主机名
+  hostname
+  
+  # 配置域名映射
+  vim /etc/hosts
+  # 有个localhost 按照它的格式来，一般第一个为ip， 第二个域名，第三个为别名
+  # 重启下服务
+  shutdown 
+  
+  ```
+
+  
 
 ### 步骤二：配置相应的文件
 
@@ -256,6 +299,10 @@ ip:50070 查看NameNode信息
 ip:8088 yarn-webui 
 如下图：
 ![yarn](https://raw.githubusercontent.com/Jiang1311/MuitSourBigData/master/document_library/assert/8088.png)
+
+一切正常的话，说明已经配置好啦；对其中我出现的几个问题进行
+
+
 
 
 ### 常用的端口配置
