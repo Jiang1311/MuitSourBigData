@@ -64,7 +64,7 @@ Prerequisites
 
 *Hadoop’s Java configuration is driven by two types of important configuration files:*
 
-- *Read-only default configuration - `core-default.xml`, `hdfs-default.xml`, `yarn-default.xml` and `mapred-default.xml`.      
+- Read-only default configuration - `core-default.xml`, `hdfs-default.xml`, `yarn-default.xml` and `mapred-default.xml`.      
 - default 文件在源码的只读文件，理解为SpringBoot的默认配置即可
 - *Site-specific configuration - `etc/hadoop/core-site.xml`, `etc/hadoop/hdfs-site.xml`, `etc/hadoop/yarn-site.xml` and `etc/hadoop/mapred-site.xml`.*
 - site文件，为用户提供特定配置使用的文件，具体配置参考下面的文件
@@ -249,7 +249,14 @@ bash start-yarn.sh
 ```
 
 ip:50070 查看NameNode信息
+如下图显示：
+
 ![NameNode WebUI](https://raw.githubusercontent.com/Jiang1311/MuitSourBigData/master/document_library/assert/50070.png)
+
+ip:8088 yarn-webui 
+如下图：
+![yarn](https://raw.githubusercontent.com/Jiang1311/MuitSourBigData/master/document_library/assert/8088.png)
+
 
 ### 常用的端口配置
 
