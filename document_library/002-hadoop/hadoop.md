@@ -2,7 +2,6 @@
 
 # 阿里云ESC搭建hadoop集群
 
-[TOC]
 
 
 
@@ -250,6 +249,7 @@ bash start-yarn.sh
 ```
 
 ip:50070 查看NameNode信息
+![NameNode WebUI](https://raw.githubusercontent.com/Jiang1311/MuitSourBigData/master/document_library/assert/50070.png)
 
 ### 常用的端口配置
 
