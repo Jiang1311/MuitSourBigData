@@ -9,7 +9,7 @@
 
 ​	购买至少三台服务器，为了节约成本借了两个账号买了三台同一区域的服务器，安装的是 centos7；因此设计到不同账号相同地域之间通讯问题，阿里给了解决方案，详情参考： [云企网](https://help.aliyun.com/document_detail/128508.html?spm=a2c4g.11186623.2.10.798818c0oNp97J)
 
-
+在目录000-ESC上会整理一版，ESC相关配置和使用的文档，主要是我这边配置的时候用到的坑吧
 
 ## 集群相关信息
 
@@ -269,7 +269,7 @@ Prerequisites
 #### env.sh文件
 
 ```shell
-# The java implementation to use. 修改为自己的JAVA_HOME即可
+# The java implementation to use. 放开注解，修改为自己的JAVA_HOME即可
 #export JAVA_HOME=${JAVA_HOME}
 
 ```
@@ -294,15 +294,48 @@ bash start-yarn.sh
 ip:50070 查看NameNode信息
 如下图显示：
 
-![NameNode WebUI](https://raw.githubusercontent.com/Jiang1311/MuitSourBigData/master/document_library/assert/50070.png)
+![NameNode WebUI](https://raw.githubusercontent.com/Jiang1311/MuitSourBigData/master/document_library/assert/hadoop/50070.png)
 
 ip:8088 yarn-webui 
 如下图：
-![yarn](https://raw.githubusercontent.com/Jiang1311/MuitSourBigData/master/document_library/assert/8088.png)
+![yarn](https://raw.githubusercontent.com/Jiang1311/MuitSourBigData/master/document_library/assert/hadoop/8088.png)
 
-一切正常的话，说明已经配置好啦；对其中我出现的几个问题进行
+一切正常的话，说明已经配置好啦；
 
+#### 配置群起
 
+单点启动既耗时，由容易出错，那有没有什么好的方法了，当然有啦
+
+**ssh免密**
+
+```shell
+# 先配置ssh登录，又称非login登录
+ssh (目标主机)ip
+yes
+# 如果没有预装ssh
+yum install ssh 
+# 无密登录原理和gitHub ssh登录一样，需要设置秘钥对，所以需要你在主节点生成秘钥对
+ssh-keygen -t rsa
+# 上述命令简单理解为： 使用rsa非对称加密算法，生成一对秘钥，秘钥的位置在/home/用户/.ssh目录下
+# .开头的说明是隐藏文件，ll -a 可以查看所有文件， 
+ssh-copy-id 目标主机（包括主机当前的主机，为啥呢； 试试ssh 加当前ip就知道啦，主要是两种不同的登录方式）
+# 测试
+ssh ip （不需要输入密码啦）
+```
+
+注意：
+
+还需要在**node2**上采用**普通账号**配置一下无密登录（因为yarn的resourcemanager配置在node2上根据）
+
+**群起**
+
+node1节点
+
+start-hdfs.sh
+
+node2节点
+
+start-yarn.sh
 
 
 ### 常用的端口配置
@@ -339,34 +372,4 @@ ip:8088 yarn-webui
 
 
 
-将开发程序的端口允许外部访问。比如 HDFS 的 50070 端口、YARN 的 8088端口等
 
-# 基础环境装配
-
-
-
-
-
-
-
-## 1  配置主机名称  根据个人喜好可选
-
-```
-#    查看主机名: 
-hoastname
- 
-# 修改主机名 
-vim /etc/sysconfig/network
-# 重启服务器后生效
-shutdown -r 
-# 方法二 hostnamectl set-hostname 名称
-hostnameclt set-hostname name
-```
-
-
-
-## 2 配置主机名映射关闭防火墙
-
-
-
-sbin/start-dfs.sh
