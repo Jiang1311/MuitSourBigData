@@ -16,6 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <hadoop.version>2.7.7</hadoop.version>
     </properties>
 
     <dependencies>
@@ -47,8 +48,6 @@
             <artifactId>commons-codec</artifactId>
         </dependency>
 
-
-
         <!-- rpd4j 文件监听，注意scope是test，如果是项目中使用记得修改-->
         <dependency>
             <groupId>commons-net</groupId>
@@ -73,6 +72,47 @@
             <artifactId>rdp4j</artifactId>
             <version>0.0.8</version>
             <scope>test</scope>
+        </dependency>
+
+        <!--hadoop hdfs-->
+
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-hadoop</artifactId>
+            <version>2.5.0.RELEASE</version>
+        </dependency>
+
+        <!-- kafka -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <!--zookeeper-->
+        <dependency>
+            <groupId>com.101tec</groupId>
+            <artifactId>zkclient</artifactId>
+            <version>0.10</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--redis-->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>2.1.10.RELEASE</version>
+        </dependency>
+
+        <!--aop-->
+        <dependency>
+            <groupId>org.mp4parser</groupId>
+            <artifactId>isoparser</artifactId>
+            <version>1.9.27</version>
         </dependency>
 
 
