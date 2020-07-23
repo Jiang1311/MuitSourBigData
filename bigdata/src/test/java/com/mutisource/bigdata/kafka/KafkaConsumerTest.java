@@ -15,7 +15,7 @@ import java.util.Properties;
 public class KafkaConsumerTest {
     public static void main(String[] args) {
         Properties props = new Properties();
-        props.setProperty("bootstrap.servers", "39.107.107.120:9092");
+        props.setProperty("bootstrap.servers", "hadoop001:9092");
         props.setProperty("group.id", "test1");
         props.setProperty("enable.auto.commit", "false");
         props.setProperty("auto.commit.interval.ms", "1000");
