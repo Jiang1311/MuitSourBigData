@@ -16,7 +16,7 @@ public class KafkaConsumerTest {
     public static void main(String[] args) {
         Properties props = new Properties();
         props.setProperty("bootstrap.servers", "hadoop001:9092");
-        props.setProperty("group.id", "test1");
+        props.setProperty("group.id", "test1" + System.currentTimeMillis());
         props.setProperty("enable.auto.commit", "false");
         props.setProperty("auto.commit.interval.ms", "1000");
         props.setProperty("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
@@ -28,12 +28,9 @@ public class KafkaConsumerTest {
             for (ConsumerRecord<String, String> record : records)
                 System.out.printf("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
 
-            consumer.commitAsync(new OffsetCommitCallback() {
-                @Override
-                public void onComplete(Map<TopicPartition, OffsetAndMetadata> offsets, Exception exception) {
-                    if (exception != null) {
-                        System.err.println("Commit failed for" + offsets);
-                    }
+            consumer.commitAsync((offsets, exception) -> {
+                if (exception != null) {
+                    System.err.println("Commit failed for" + offsets);
                 }
             });//异步提交
         }
