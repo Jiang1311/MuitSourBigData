@@ -1,11 +1,9 @@
 package com.mutisource.bigdata.kafka;
 
 import org.apache.kafka.clients.consumer.*;
-import org.apache.kafka.common.TopicPartition;
 
 import java.time.Duration;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.Properties;
 
 /**

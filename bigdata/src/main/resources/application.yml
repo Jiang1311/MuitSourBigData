@@ -1,25 +1,29 @@
-
 ---
 spring:
   profiles.active: dev
 
-
 # Mybatis-Plus
-
-
 
 ---
 spring:
   profiles: dev
+
+
+#redis 连接信息,redis没有用户的概念
+redis:
+  host: hadoop001
+  port: 6379
+  password: 123456
+
 #zookeeper参数
 zookeeper:
   servers: hadoop001:2181,hadoop002:2181,hadoop003:2181
   sessionTimeOut: 6000
-  rootNode: /weather
-  projectNode: /weather/storage
-  productNodes: /weather/products
-  masterNode: /weather/storage/master
-  onlineNodes: /weather/storage/online
+  rootNode: /Jeremy
+  projectNode: /Jeremy/collection
+  productNodes: /Jeremy/data
+  masterNode: /Jeremy/collection/master
+  onlineNodes: /Jeremy/collection/online
 
 # 消费者配置
 kafka:
